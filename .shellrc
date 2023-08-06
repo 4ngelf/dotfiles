@@ -9,8 +9,6 @@ export REPO_PERSONAL_HOME="$REPO_HOME/personal"
 export REPO_THIRD_HOME="$REPO_HOME/thirdparty"
 
 
-
-
 # ---------- INSTALL PROGRAMS ----------
 
 ensure() {
@@ -22,6 +20,7 @@ ensure() {
 ensure python3
 ensure nala
 ensure nnn
+ensure fzf
 
 unset ensure
 
@@ -39,6 +38,7 @@ alias pn=pnpm
 alias python="python3"
 alias icat="kitty +kitten icat"
 alias V="nvim"
+alias nnn="nnn -H"
 
 # Shutdown pc when there's a blackout
 alias sefelalu="shutdown --poweroff now"
