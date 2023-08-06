@@ -11,7 +11,6 @@ alias clipboard="xclip -sel clip"
 alias pn=pnpm
 alias python="python3"
 alias icat="kitty +kitten icat"
-alias nvim="~/.local/share/appimage/nvim.appimage"
 alias V="nvim"
 
 # Shutdown pc when there's a blackout
@@ -38,3 +37,9 @@ lnsoft() {
 		ln -s "$source_path" "./$base_name"
 	done
 }
+
+# If there's some local config load them
+if [ -f ./local.shellrc ]; then
+    source ./local.shellrc
+fi
+
