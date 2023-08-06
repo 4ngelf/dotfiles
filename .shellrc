@@ -1,10 +1,29 @@
- # Custom user Configuration for shell
+# Custom user Configuration for shell
 
 # ---------- CUSTOM ENV VARIABLES ----------
+
+export DOTFILES_HOME=$(dirname $0)
 
 export REPO_HOME="$HOME/Repo"
 export REPO_PERSONAL_HOME="$REPO_HOME/personal"
 export REPO_THIRD_HOME="$REPO_HOME/thirdparty"
+
+
+
+
+# ---------- INSTALL PROGRAMS ----------
+
+ensure() {
+	if ! command -V $1 &>/dev/null; then
+		echo please install $1
+	fi
+}
+
+ensure python3
+ensure nala
+ensure nnn
+
+unset ensure
 
 
 # ---------- ALIASES ----------
@@ -50,13 +69,26 @@ lnsoft() {
 }
 
 repo(){
-	test -d "$REPO_PERSONAL_HOME" || mkdir -p "$REPO_PERSONAL_HOME"
-	git clone $@ "$REPO_PERSONAL_HOME"
+	GIT_USERNAME="4ngelf"
+	DST=$($DOTFILES_HOME/tool/repo_owner.py $GIT_USERNAME $@)
+	
+	test $? -eq 0 || exit 1
+
+	CURRENT=$(pwd)
+	if [[ "$DST" == "personal" ]]; then
+		[[ -d "$REPO_PERSONAL_HOME" ]] || mkdir -p "$REPO_PERSONAL_HOME"
+		cd "$REPO_PERSONAL_HOME"
+		git clone $@
+	else
+		[[ -d "$REPO_THIRD_HOME" ]] || mkdir -p "$REPO_THIRD_HOME"
+		cd "$REPO_THIRD_HOME"
+		git clone $@
+	fi
+	cd $CURRENT
 }
 
-clonerepo(){
-	test -d "$REPO_THIRD_HOME" || mkdir -p "$REPO_THIRD_HOME"
-	git clone $@ "$REPO_THIRD_HOME"
+open-repo(){
+	# TODO	
 }
 
 

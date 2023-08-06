@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# This tool ensures that the app is in the enviroment.
+# If not it install it through apt
+
+APP="$1"
+
+if ! command -V $APP; then
+  echo install $APP
+fi
