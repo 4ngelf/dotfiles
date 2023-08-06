@@ -1,4 +1,4 @@
-# dotfiles
+# .dotfiles
 
 My personal dotfiles to share between OS installation.
 
