@@ -1,0 +1,40 @@
+ # Custom user Configuration for shell
+
+alias ssh-user='ssh-add $HOME/.ssh/github'
+
+alias ls="ls --color=auto"
+alias l="ls -Algh --time-style=iso --color=auto --group-directories-first"
+# For directing standard output to clipboard.
+# use like 'echo "Hello" | clipboard' then use Ctrl+V somewhere.
+alias clipboard="xclip -sel clip"
+
+alias pn=pnpm
+alias python="python3"
+alias icat="kitty +kitten icat"
+alias nvim="~/.local/share/appimage/nvim.appimage"
+alias V="nvim"
+
+# Shutdown pc when there's a blackout
+alias sefelalu="shutdown --poweroff now"
+
+PLESS_STYLE="monokai"
+
+# pless <arg>
+# Color text before passing args to less
+pless() {
+	pygmentize -O style="$PLESS_STYLE" $1 | less
+}
+
+# lnsoft {<source_path> ... }
+# Create a softs links on current directory pointing to sources
+lnsoft() {
+	if [ $# -eq 0 ]; then
+		echo "Usage: lnsoft {<source_path>, ... }"
+		return 1
+	fi
+
+	for source_path in "$@"; do
+		base_name=$(basename "$source_path")
+		ln -s "$source_path" "./$base_name"
+	done
+}
