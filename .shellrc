@@ -1,5 +1,13 @@
  # Custom user Configuration for shell
 
+# ---------- CUSTOM ENV VARIABLES ----------
+
+export REPO_HOME="$HOME/Repo"
+export REPO_PERSONAL_HOME="$REPO_HOME/personal"
+export REPO_THIRD_HOME="$REPO_HOME/thirdparty"
+
+
+# ---------- ALIASES ----------
 alias ssh-user='ssh-add $HOME/.ssh/github'
 
 alias ls="ls --color=auto"
@@ -15,6 +23,9 @@ alias V="nvim"
 
 # Shutdown pc when there's a blackout
 alias sefelalu="shutdown --poweroff now"
+
+
+# ---------- CUSTOM FUNCTIONS ----------
 
 PLESS_STYLE="monokai"
 
@@ -37,6 +48,19 @@ lnsoft() {
 		ln -s "$source_path" "./$base_name"
 	done
 }
+
+repo(){
+	test -d "$REPO_PERSONAL_HOME" || mkdir -p "$REPO_PERSONAL_HOME"
+	git clone $@ "$REPO_PERSONAL_HOME"
+}
+
+clonerepo(){
+	test -d "$REPO_THIRD_HOME" || mkdir -p "$REPO_THIRD_HOME"
+	git clone $@ "$REPO_THIRD_HOME"
+}
+
+
+# ---------- LOCAL CONFIG ----------
 
 # If there's some local config load them
 if [ -f ./local.shellrc ]; then
