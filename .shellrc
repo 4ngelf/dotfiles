@@ -23,7 +23,6 @@ ensure nala
 ensure nnn
 ensure fzf
 ensure xclip
-ensure nvim
 
 unset ensure
 
