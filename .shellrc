@@ -22,6 +22,8 @@ ensure python3
 ensure nala
 ensure nnn
 ensure fzf
+ensure xclip
+ensure nvim
 
 unset ensure
 
@@ -102,7 +104,7 @@ repopen(){
 # ---------- LOCAL CONFIG ----------
 
 # If there's some local config load them
-if [ -f ./local.shellrc ]; then
-    source ./local.shellrc
+if [ -f $DOTFILES_HOME/local.shellrc ]; then
+    source $DOTFILES_HOME/local.shellrc
 fi
 
