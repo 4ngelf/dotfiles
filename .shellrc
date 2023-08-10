@@ -40,7 +40,8 @@ alias pn=pnpm
 alias python="python3"
 alias icat="kitty +kitten icat"
 alias V="nvim"
-alias nnn="nnn -H"
+alias nnn="EDITOR=nvim nnn -eH"
+alias n="nnn"
 
 # Shutdown pc when there's a blackout
 alias sefelalu="shutdown --poweroff now"
@@ -96,7 +97,7 @@ repopen(){
 		-mindepth 2 -maxdepth 2 \
 		-type d -not -path "*/playground/*" | fzf )
 	
-	cd $SELECTED
+	nnn $SELECTED
 }
 
 

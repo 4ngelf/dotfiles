@@ -18,6 +18,10 @@ cd $HOME/.dotfiles
 bash -c ./setup
 ```
 
+# TODO
+
+[ ] - Embed a setup utility to automatically install required programs.
+
 # License
 
 [MIT License](./LICENSE)
