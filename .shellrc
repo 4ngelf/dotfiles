@@ -39,6 +39,8 @@ alias clipboard="xclip -sel clip"
 
 alias pn=pnpm
 alias python="python3"
+alias py="python"
+alias ipy="ipython"
 alias icat="kitty +kitten icat"
 alias V="nvim"
 alias nnn="EDITOR=nvim nnn -eH"
