@@ -1,3 +1,4 @@
+#!/bin/sh
 # Custom user Configuration for shell
 
 # ---------- CUSTOM ENV VARIABLES ----------
@@ -97,7 +98,7 @@ repopen(){
 		-mindepth 2 -maxdepth 2 \
 		-type d -not -path "*/playground/*" | fzf )
 	
-	nnn $SELECTED
+	cd $SELECTED
 }
 
 
