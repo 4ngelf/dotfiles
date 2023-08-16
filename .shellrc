@@ -49,6 +49,8 @@ alias n="nnn"
 # Shutdown pc when there's a blackout
 alias sefelalu="shutdown --poweroff now"
 
+# Open nvim configuration
+alias Vconf="nvim $HOME/.config/nvim"
 
 # ---------- CUSTOM FUNCTIONS ----------
 
