@@ -3,19 +3,21 @@
 
 # ---------- CUSTOM ENV VARIABLES ----------
 
-export DOTFILES_HOME=$(dirname $0)
+DOTFILES_HOME="$(dirname "$0")"
 
+export DOTFILES_HOME
 export GIT_USERNAME="4ngelf"
 export REPO_HOME="$HOME/Repo"
 export REPO_PERSONAL_HOME="$REPO_HOME/personal"
 export REPO_THIRD_HOME="$REPO_HOME/thirdparty"
+export PLESS_STYLE
 
 
 # ---------- INSTALL PROGRAMS ----------
 
 ensure() {
-	if ! command -V $1 &>/dev/null; then
-		echo please install $1
+	if ! command -V "$1" >/dev/null; then
+		echo please install "$1"
 	fi
 }
 
@@ -49,8 +51,9 @@ alias n="nnn"
 # Shutdown pc when there's a blackout
 alias sefelalu="shutdown --poweroff now"
 
-# Open nvim configuration
-alias Vconf="nvim $HOME/.config/nvim"
+# Configure with nvim
+alias Vconf="nvim \${HOME}/.config/nvim"
+alias dotfiles="nvim \$DOTFILES_HOME"
 
 # ---------- CUSTOM FUNCTIONS ----------
 
@@ -59,7 +62,7 @@ PLESS_STYLE="monokai"
 # pless <arg>
 # Color text before passing args to less
 pless() {
-	pygmentize -O style="$PLESS_STYLE" $1 | less
+	pygmentize -g -O style="$PLESS_STYLE" "$1" | less
 }
 
 # lnsoft {<source_path> ... }
@@ -79,21 +82,21 @@ lnsoft() {
 # Clone a git repository and store it on a personal or thirparty folder
 # by the owner of the repository.
 repo(){
-	DST=$($DOTFILES_HOME/tool/repo_owner.py $GIT_USERNAME $@)
+	DST=$("$DOTFILES_HOME/tool/repo_owner.py" $GIT_USERNAME "$@")
 	
 	test $? -eq 0 || exit 1
 
-	CURRENT=$(pwd)
-	if [[ "$DST" == "personal" ]]; then
-		[[ -d "$REPO_PERSONAL_HOME" ]] || mkdir -p "$REPO_PERSONAL_HOME"
-		cd "$REPO_PERSONAL_HOME"
-		git clone $@
+	CURRENT="$PWD"
+	if [ "$DST" = "personal" ]; then
+		[ -d "$REPO_PERSONAL_HOME" ] || mkdir -p "$REPO_PERSONAL_HOME"
+		cd "$REPO_PERSONAL_HOME" || exit 1
+		git clone "$@"
 	else
-		[[ -d "$REPO_THIRD_HOME" ]] || mkdir -p "$REPO_THIRD_HOME"
-		cd "$REPO_THIRD_HOME"
-		git clone $@
+		[ -d "$REPO_THIRD_HOME" ] || mkdir -p "$REPO_THIRD_HOME"
+		cd "$REPO_THIRD_HOME" || exit 1
+		git clone "$@"
 	fi
-	cd $CURRENT
+	cd "$CURRENT" || exit 1
 }
 
 # Open repository from list with fuzzy search
@@ -102,14 +105,15 @@ repopen(){
 		-mindepth 2 -maxdepth 2 \
 		-type d -not -path "*/playground/*" | fzf )
 	
-	cd $SELECTED
+    clear
+	cd "$SELECTED" || exit 1 
 }
 
 
 # ---------- LOCAL CONFIG ----------
 
 # If there's some local config load them
-if [ -f $DOTFILES_HOME/local.shellrc ]; then
-    source $DOTFILES_HOME/local.shellrc
+if [ -f "$DOTFILES_HOME/local.shellrc" ]; then
+    . "$DOTFILES_HOME/local.shellrc"
 fi
 
