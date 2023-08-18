@@ -52,12 +52,12 @@ alias n="nnn"
 alias sefelalu="shutdown --poweroff now"
 
 # Configure with nvim
-alias Vconf="nvim \${HOME}/.config/nvim"
-alias dotfiles="nvim \$DOTFILES_HOME"
+alias Vconf="nvim --cmd \"call chdir(stdpath('config'))\""
+alias dotfiles="nvim --cmd 'cd \$DOTFILES_HOME'"
 
 # ---------- CUSTOM FUNCTIONS ----------
 
-PLESS_STYLE="monokai"
+PLESS_STYLE="catppuccin-frappe"
 
 # pless <arg>
 # Color text before passing args to less
