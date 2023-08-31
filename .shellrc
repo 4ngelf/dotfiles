@@ -39,10 +39,12 @@ alias l="ls -Algh --time-style=iso --color=auto --group-directories-first"
 # use like 'echo "Hello" | clipboard' then use Ctrl+V somewhere.
 alias clipboard="xclip -sel clip"
 
-alias pn=pnpm
+# Utilities alias
+alias pn="pnpm"
 alias python="python3"
 alias py="python"
 alias ipy="ipython"
+alias psh="poetry shell"
 alias icat="kitty +kitten icat"
 alias V="nvim"
 alias nnn="EDITOR=nvim nnn -eH"
