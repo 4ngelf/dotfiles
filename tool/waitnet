@@ -1,0 +1,21 @@
+#!/bin/bash
+# Checks HOST until there's a connection 
+# and then displays the time it was available.
+
+host_tested="$1"
+test -n "$host_tested" || host_tested="8.8.8.8"	
+
+conection=1
+counter=0
+
+echo "Checking until $host_tested available..."
+while test "$conection" != 0; do
+    counter=$((counter + 1))
+    echo -ne "\r\t- tried $counter times"
+    ping -c 1 "$host_tested" >/dev/null 2>&1
+    conection="$?"
+    sleep 2
+done
+
+echo -e "\n$host_tested available at $(date)!"
+exit 0
